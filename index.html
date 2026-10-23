@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#8f102d">
+<title>A Letter Just for You ❤️</title>
+<style>
+  :root { --wine:#720d27; --red:#a8183b; --rose:#e85d78; --pink:#ffe5eb; --paper:#fffaf7; }
+  * { box-sizing: border-box; }
+  body {
+    margin:0; min-height:100vh; overflow-x:hidden; display:grid; place-items:center;
+    font-family: Georgia, "Times New Roman", serif; color:#5b1830;
+    background: radial-gradient(circle at 20% 20%, #d94b68 0, transparent 32%),
+                radial-gradient(circle at 80% 75%, #f08ca0 0, transparent 28%),
+                linear-gradient(145deg, #6d0924, #a51d3e 55%, #7a102e);
+    padding:24px;
+  }
+  .glow { position:fixed; inset:0; pointer-events:none; background:linear-gradient(120deg,transparent,rgba(255,255,255,.06),transparent); }
+  .float-heart { position:fixed; bottom:-40px; color:rgba(255,220,229,.45); animation:rise linear infinite; pointer-events:none; }
+  @keyframes rise { from { transform:translateY(0) rotate(0); opacity:0; } 12%{opacity:.8} to { transform:translateY(-115vh) rotate(28deg); opacity:0; } }
+  .wrap { width:min(100%, 660px); text-align:center; position:relative; z-index:1; }
+  .eyebrow { color:#ffe0e7; letter-spacing:.18em; text-transform:uppercase; font:12px Arial,sans-serif; margin-bottom:20px; }
+  h1 { color:#fff1f4; font-size:clamp(28px, 6vw, 42px); font-weight:normal; margin:0 0 10px; text-shadow:0 3px 18px #4b0619; }
+  .subtitle { color:#ffe0e7; font:15px Arial,sans-serif; margin:0 0 26px; }
+  button { cursor:pointer; border:0; font:inherit; }
+  .envelope-button { background:transparent; padding:0; width:min(360px, 90vw); filter:drop-shadow(0 18px 24px rgba(50,0,15,.28)); transition:transform .25s; }
+  .envelope-button:hover { transform:translateY(-5px); }
+  .envelope { position:relative; height:220px; background:#f7b5c4; border-radius:8px; overflow:hidden; }
+  .envelope:before { content:""; position:absolute; inset:0; background:#fbd1da; clip-path:polygon(0 0,50% 58%,100% 0); z-index:3; }
+  .envelope:after { content:""; position:absolute; inset:0; background:#e98aa1; clip-path:polygon(0 100%,0 0,50% 58%,100% 0,100% 100%); z-index:2; }
+  .envelope-front { position:absolute; inset:0; background:#f6a7b9; clip-path:polygon(0 100%,50% 47%,100% 100%); z-index:4; }
+  .seal { position:absolute; z-index:5; left:50%; top:53%; transform:translate(-50%,-50%); width:54px;height:54px;display:grid;place-items:center;border-radius:50%;background:#a9183d;color:#fff0f4;font-size:27px;box-shadow:0 3px 12px #a43b57; }
+  .tap { margin-top:18px; color:#fff0f4; font:14px Arial,sans-serif; }
+  .letter { display:none; background:var(--paper); border:1px solid #f5d4db; border-radius:14px; padding:clamp(22px, 5vw, 40px); box-shadow:0 22px 60px rgba(35,0,12,.3); animation:appear .7s ease both; }
+  @keyframes appear { from {opacity:0;transform:translateY(18px) scale(.98)} to {opacity:1;transform:translateY(0) scale(1)} }
+  .heart-mark { font-size:36px; color:#b51c42; margin-bottom:12px; }
+  .letter h2 { font-size:clamp(24px, 5vw, 34px); font-weight:normal; margin:0 0 18px; color:#8f1232; }
+  .message { font-family: Arial, Tahoma, sans-serif; direction:rtl; text-align:right; color:#613343; line-height:2.05; font-size:clamp(16px, 3.6vw, 19px); white-space:pre-line; }
+  .signature { margin-top:28px; color:#9d173b; font-style:italic; font-size:22px; }
+  .last-button { margin-top:28px; background:linear-gradient(135deg,#a8173d,#d84465); color:white; border-radius:999px; padding:13px 23px; font:14px Arial,sans-serif; box-shadow:0 7px 18px #dca0af; transition:transform .2s; }
+  .last-button:hover { transform:translateY(-2px); }
+  .secret { display:none; margin:22px auto 0; max-width:500px; padding:18px; border-radius:12px; background:#ffedf1; border:1px solid #f4cbd5; line-height:1.9; font-family:Arial,Tahoma,sans-serif; direction:rtl; font-size:18px; animation:appear .55s ease both; }
+  .secret .small-heart { font-size:25px; display:block; margin-bottom:7px; }
+  .footer { margin-top:24px; color:#ffdce4; font:11px Arial,sans-serif; opacity:.85; }
+  @media (prefers-reduced-motion: reduce) { *,*::before,*::after {animation-duration:.01ms!important;transition-duration:.01ms!important;} }
+</style>
+</head>
+<body>
+<div class="glow"></div>
+<main class="wrap">
+  <div class="eyebrow">A little something from my heart</div>
+  <h1>A letter just for you ❤️</h1>
+  <p class="subtitle">Made with love, just for one special person.</p>
+
+  <button class="envelope-button" id="openLetter" aria-label="Open your letter">
+    <div class="envelope">
+      <div class="envelope-front"></div>
+      <div class="seal">♥</div>
+    </div>
+  </button>
+  <div class="tap" id="tapText">Open your letter, my love ❤️</div>
+
+  <section class="letter" id="letter" aria-live="polite">
+    <div class="heart-mark">♥</div>
+    <h2>To my favorite person</h2>
+    <div class="message">حبيت أقولك إني بحبك أوي أوي، وبحبك كلمة قليلة فعلًا على اللي جوايا. أنا محظوظ أوي بوجودك في حياتي، دايمًا واقفة جنبي ومستحملاني، ومعايا في الوحش قبل الحلو.
+
+ربنا يخليكي ليا يا أحلى حاجة حصلتلي في الدنيا، وأفضل موجود معاكي وجنبك دايمًا، ومخيّبش ظنك فيا في يوم من الأيام.
+
+وربنا يجمعنا في الآخر على خير، علشان أبقى اخترت أحلى وأجمل وأحن واحدة في الدنيا، ونبقى أحسن أم وأب في الدنيا.
+
+بحبك أوي يا نوري، ربنا يخليكي ليا ويديمك دايمًا في حياتي يا عمري ❤️</div>
+    <div class="signature">Forever yours,<br>Nour ❤️</div>
+    <button class="last-button" id="lastButton">One last thing... ❤️</button>
+    <div class="secret" id="secret">
+      <span class="small-heart">❤️</span>
+      شكراً جداً لوجودك في حياتي، دي نعمة أنا بحمد ربنا عليها. ربنا يخليكي ليا وما يحرمنيش منك أبداً يا أغلى حاجة في عمري ❤️❤️
+    </div>
+  </section>
+  <div class="footer">A little letter, with a whole lot of love.</div>
+</main>
+<script>
+  const symbols = ["♥", "♡", "❤"];
+  for (let i = 0; i < 18; i++) {
+    const heart = document.createElement("div");
+    heart.className = "float-heart";
+    heart.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (12 + Math.random() * 20) + "px";
+    heart.style.animationDuration = (9 + Math.random() * 12) + "s";
+    heart.style.animationDelay = (-Math.random() * 18) + "s";
+    document.body.appendChild(heart);
+  }
+  const openButton = document.getElementById("openLetter");
+  const letter = document.getElementById("letter");
+  const tapText = document.getElementById("tapText");
+  openButton.addEventListener("click", () => {
+    openButton.style.display = "none";
+    tapText.style.display = "none";
+    letter.style.display = "block";
+    document.querySelector(".subtitle").textContent = "A few words from my heart to yours.";
+  });
+  document.getElementById("lastButton").addEventListener("click", function() {
+    document.getElementById("secret").style.display = "block";
+    this.textContent = "Always and forever ❤️";
+    this.disabled = true;
+  });
+</script>
+</body>
+</html>
